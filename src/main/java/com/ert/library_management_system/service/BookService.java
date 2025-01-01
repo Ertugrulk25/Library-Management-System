@@ -1,8 +1,10 @@
 package com.ert.library_management_system.service;
 
 import com.ert.library_management_system.domain.Books;
+import com.ert.library_management_system.domain.Student;
 import com.ert.library_management_system.exception.BookNotFoundException;
 import com.ert.library_management_system.repository.BookRepository;
+import com.ert.library_management_system.repository.StudentRepository;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,8 +14,10 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
+
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
+
     }
 
     public void saveBook() {
@@ -82,14 +86,18 @@ public class BookService {
 
     public void updateById(Long updateBookId) {
         Books books = findBookById(updateBookId);
+        Student student = new Student();
 
-        System.out.println("Enter new book name");
-        String newBookName = scanner.nextLine();
-        books.setBookName(newBookName);
 
-        System.out.println("Enter new author name");
-        String newAuthor = scanner.nextLine();
-        books.setAuthor(newAuthor);
+        System.out.println("Enter book situation");
+        boolean book = scanner.nextBoolean();
+        books.setBorrow(book);
+
+        System.out.println("Enter student ID: ");
+        Long id = scanner.nextLong();
+        student.setId(id);
+
+        books.setStudent(student);
 
         bookRepository.update(books);
 

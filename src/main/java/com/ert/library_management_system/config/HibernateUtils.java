@@ -18,19 +18,25 @@ public class HibernateUtils {
                     addAnnotatedClass(Student.class);
             sessionFactory = configuration.buildSessionFactory();
         } catch (Exception e) {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
+            ;
         }
     }
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
+
     public static void shutDown() {
         if (sessionFactory != null && sessionFactory.isOpen()) {
             sessionFactory.close();
         }
     }
-    public static void closeSession(Session session){
-        session.close();
+
+    public static void closeSession(Session session) {
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
     }
+
 }

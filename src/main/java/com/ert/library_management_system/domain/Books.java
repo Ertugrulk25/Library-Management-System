@@ -1,6 +1,8 @@
 package com.ert.library_management_system.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Books {
@@ -14,14 +16,19 @@ private String author;
 @Column(nullable = false)//henüz ödünç alınmadığı için başlangıç değeri false
 private boolean borrow = false;
 
+    @ManyToOne
+    @JoinColumn(name = "student_id") // İlişkiyi kurmak için bir yabancı anahtar
+    private Student student; // Kitabı ödünç alan öğrenciler
+
     public Books() {
     }
 
-    public Books(Long id, String bookName, String author, boolean borrow) {
+    public Books(Long id, String bookName, String author, boolean borrow, Student student) {
         this.id = id;
         this.bookName = bookName;
         this.author = author;
         this.borrow = borrow;
+        this.student = student;
     }
 
     public Long getId() {
@@ -29,7 +36,7 @@ private boolean borrow = false;
     }
 
 //    public void setId(Long id) {
-//        this.id = id;
+//        this.wid = id;
 //    }
 
     public String getBookName() {
@@ -56,6 +63,14 @@ private boolean borrow = false;
         this.borrow = borrow;
     }
 
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     @Override
     public String toString() {
         return "Books{" +
@@ -63,6 +78,7 @@ private boolean borrow = false;
                 ", bookName='" + bookName + '\'' +
                 ", author='" + author + '\'' +
                 ", borrow=" + borrow +
+                ", student=" + student +
                 '}';
     }
 }
