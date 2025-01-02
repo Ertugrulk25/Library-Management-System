@@ -60,7 +60,7 @@ public class LibraryManagementSystem {
             System.out.println("2. Find Book By ID");
             System.out.println("3. Delete Book By ID");
             System.out.println("4. Find All Books");
-            System.out.println("5. Update Book By ID");
+            System.out.println("5. BORROW A BOOK ");
             System.out.println("0. Return to Main Menu");
             System.out.print("Enter your choice: ");
 
